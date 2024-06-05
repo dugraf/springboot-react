@@ -20,7 +20,7 @@ public class ProdutoServico {
         return pr.findAll();
     }
 
-    public ResponseEntity<?> cadastrar(ProdutoModelo pm) {
+    public ResponseEntity<?> cadastrarAlterar(ProdutoModelo pm, String acao) {
         if(pm.getNome().equals("")) {
             rm.setMensagem("O nome do produto eh obrigatorio!");
             return new ResponseEntity<RespostaModelo>(rm, HttpStatus.BAD_REQUEST);
@@ -30,7 +30,10 @@ public class ProdutoServico {
             return new ResponseEntity<RespostaModelo>(rm, HttpStatus.BAD_REQUEST);
         }
         else {
-            return new ResponseEntity<ProdutoModelo>(pr.save(pm), HttpStatus.CREATED);
+            if(acao.equals("cadastrar"))
+                return new ResponseEntity<ProdutoModelo>(pr.save(pm), HttpStatus.CREATED);
+            else
+                return new ResponseEntity<ProdutoModelo>(pr.save(pm), HttpStatus.OK);
         }
     }
 }

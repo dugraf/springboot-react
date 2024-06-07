@@ -25,10 +25,15 @@ function App() {
       .then(retono_convertido => setProdutos(retono_convertido));
   }, [] /*garante a requisicao uma vez*/);
 
+  // Obtendo os dados do formulario
+  const aoDigitar = (e) => {
+    setObjProduto({.../*valor que esta contendo o objeto produto: nome, marca*/objProduto, [e.target.name]:e.target.value})
+  }
+
   return (
     <div>
       <p>{JSON.stringify(objProduto)}</p>
-      <Formulario botao={btnCadastrar}/>
+      <Formulario botao={btnCadastrar} eventoTeclado={aoDigitar}/>
       <Tabela vetor={produtos}/>
     </div>
   );
